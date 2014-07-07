@@ -6,7 +6,7 @@ SCHEDULER.every '1m' do
   buzzword_counts = Hash.new({ value: 0 })
 
   recent_users.each do |user|
-   buzzword_counts[user] = {label: user.first_name ,value: user.created_at.strftime("%Y-%m-%d %H:%M")}
+   buzzword_counts[user] = {label: user.first_name + " " + user.last_name  ,value: user.created_at.strftime("%Y-%m-%d %H:%M")}
   end
 
   send_event('buzzwords', { items: buzzword_counts.values })
