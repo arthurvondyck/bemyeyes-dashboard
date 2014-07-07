@@ -7,7 +7,6 @@ configure do
 
   helpers do
     def protected!
-     config = YAML.load_file('config/config.yml')
     MongoMapper.connection = Mongo::Connection.new(ENV['databasehost'])
     MongoMapper.database = ENV['databasename']
     end
