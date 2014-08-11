@@ -10,7 +10,7 @@ SCHEDULER.every '1m' do
   blind_user_ids = User.where(:role => "blind").collect {|blind| blind._id}.flatten
   # sighted_user_ids = User.where(:role => "helper").collect {|blind| blind._id}.flatten
 
-  # blind_user_count = Token.where(:user_id => {:$in =>blind_user_ids}).count
+  blind_user_count = Token.where(:user_id => {:$in =>blind_user_ids}).count
   # sighted_user_count = Token.where(:user_id => {:$in =>blind_user_ids}).count
 
   send_event('sighted_logged_in',   { value: 42 })
