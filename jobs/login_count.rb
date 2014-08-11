@@ -14,6 +14,6 @@ SCHEDULER.every '1m' do
   # sighted_user_count = Token.where(:user_id => {:$in =>blind_user_ids}).count
 
   send_event('sighted_logged_in',   { value: 42 })
-  send_event('blind_logged_in', {value: 21})
+  send_event('blind_logged_in', {value: blind_user_count})
   send_event('abuse_reports',   { value: AbuseReport.count })
 end
