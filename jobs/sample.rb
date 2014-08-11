@@ -7,14 +7,13 @@ current_karma = 0
 SCHEDULER.every '1m' do
   MongoMapper.connection = Mongo::Connection.new("localhost")
   MongoMapper.database = 'bemyeyes'
-  last_valuation = current_valuation
-  last_karma     = current_karma
-  current_valuation = rand(100)
-  current_karma     = rand(200000)
+  blind_user_ids = User.where(:role => "blind").collect {|blind| blind._id}.flatten
+  sighted_user_ids = User.where(:role => "helper").collect {|blind| blind._id}.flatten
 
+  blind_user_count = Token.where(:user_id => {:$in =>blind_user_ids}).count
+  sighted_user_count = Token.where(:user_id => {:$in =>blind_user_ids}).count
 
-  send_event('valuation', { current: current_valuation, last: last_valuation })
-  send_event('sighted_logged_in',   { value: 88 })
-  send_event('blind_logged_in', {value: 42})
+  send_event('sighted_logged_in',   { value: sighted_user_count })
+  send_event('blind_logged_in', {value: blind_user_count})
   send_event('abuse_reports',   { value: AbuseReport.count })
 end
