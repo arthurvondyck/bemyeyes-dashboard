@@ -7,7 +7,7 @@ current_karma = 0
 SCHEDULER.every '1m' do
   MongoMapper.connection = Mongo::Connection.new("localhost")
   MongoMapper.database = 'bemyeyes'
-  # blind_user_ids = User.where(:role => "blind").collect {|blind| blind._id}.flatten
+  blind_user_ids = User.where(:role => "blind").collect {|blind| blind._id}.flatten
   # sighted_user_ids = User.where(:role => "helper").collect {|blind| blind._id}.flatten
 
   # blind_user_count = Token.where(:user_id => {:$in =>blind_user_ids}).count
