@@ -2,6 +2,8 @@ buzzwords = ['Paradigm shift', 'Leverage', 'Pivoting', 'Turn-key', 'Streamlinine
 buzzword_counts = Hash.new({ value: 0 })
 
 SCHEDULER.every '1m' do
+  MongoMapper.connection = Mongo::Connection.new("localhost")
+  MongoMapper.database = "bemyeyes"
   recent_users = User.sort(:created_at.desc).limit(10)
   buzzword_counts = Hash.new({ value: 0 })
 

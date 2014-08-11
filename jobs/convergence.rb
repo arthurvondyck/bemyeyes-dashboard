@@ -7,6 +7,8 @@ end
 last_x = points.last[:x]
 
 SCHEDULER.every '1m' do
+MongoMapper.connection = Mongo::Connection.new("localhost")
+  MongoMapper.database = "bemyeyes"
   points.shift
   last_x += 1
   points << { x: last_x, y:  Request.count}
