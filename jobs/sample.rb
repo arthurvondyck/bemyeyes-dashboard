@@ -14,7 +14,7 @@ SCHEDULER.every '1m' do
 
 
   send_event('valuation', { current: current_valuation, last: last_valuation })
-  send_event('sighted_logged_in',   { value: Token.count })
+  send_event('sighted_logged_in',   { value: 88 })
   send_event('blind_logged_in', {value: 42})
   send_event('abuse_reports',   { value: AbuseReport.count })
 end
