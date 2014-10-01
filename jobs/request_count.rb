@@ -6,7 +6,7 @@ points = []
 end
 last_x = points.last[:x]
 
-SCHEDULER.every '1m' do
+SCHEDULER.every '1m', :first_in => 0 do
   points.shift
   last_x += 1
   points << { x: last_x, y:  Request.count}

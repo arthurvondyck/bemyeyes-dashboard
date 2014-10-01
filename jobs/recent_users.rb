@@ -1,7 +1,7 @@
 buzzwords = ['Paradigm shift', 'Leverage', 'Pivoting', 'Turn-key', 'Streamlininess', 'Exit strategy', 'Synergy', 'Enterprise', 'Web 2.0'] 
 buzzword_counts = Hash.new({ value: 0 })
 
-SCHEDULER.every '1m' do
+SCHEDULER.every '1m', :first_in => 0 do
   recent_users = User.sort(:created_at.desc).limit(10)
   buzzword_counts = Hash.new({ value: 0 })
 

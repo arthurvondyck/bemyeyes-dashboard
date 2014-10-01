@@ -4,7 +4,7 @@ current_valuation = 0
 current_karma = 0
 
 
-SCHEDULER.every '1m' do
+SCHEDULER.every '1m', :first_in => 0 do
   blind_user_ids = User.where(:role => "blind").collect {|blind| blind._id}.flatten
   sighted_user_ids = User.where(:role => "helper").collect {|blind| blind._id}.flatten
 
