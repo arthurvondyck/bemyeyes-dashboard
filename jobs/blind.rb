@@ -8,5 +8,5 @@ SCHEDULER.every '1m', :first_in => 0 do
   blind_above_5_calls = coll.aggregate([
   {"$group" => {_id: "$state", count: {"$sum" => 1}}},
   {"$match" => {count: {"$gte" => 5}}}
-])
+]).count
 end
