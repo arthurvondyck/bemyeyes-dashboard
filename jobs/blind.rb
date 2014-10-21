@@ -2,10 +2,6 @@ require "mongo"
 include Mongo
 
 SCHEDULER.every '1m', :first_in => 0 do
-  db = MongoClient.new("localhost", 27017, w: 1).db("bemyeyes")
-  coll = db.collection("requests")
-
-
   blind_above_1_calls = find_count_above 1
   send_event('blind_above_1_calls',   { value: blind_above_1_calls })
 
@@ -17,6 +13,8 @@ SCHEDULER.every '1m', :first_in => 0 do
 end
 
 def find_count_above(limit)
+  db = MongoClient.new("localhost", 27017, w: 1).db("bemyeyes")
+  coll = db.collection("requests")
   coll.aggregate([
     {"$group" => {_id: "$blind_id", count: {"$sum" => 1}}},
     {"$match" => {count: {"$gte" => limit}}}
